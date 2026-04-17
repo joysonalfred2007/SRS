@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - FilmCraft</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  background:#0e0e0e;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.login-box{
+  background:#1a1a1a;
+  padding:30px;
+  border-radius:10px;
+  width:320px;
+  text-align:center;
+  border:1px solid #333;
+}
+
+h2{
+  color:#e8312a;
+  margin-bottom:20px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:10px 0;
+  border:none;
+  border-radius:5px;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#e8312a;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+#msg{
+  margin-top:10px;
+  font-size:14px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="login-box">
+  <h2>FilmCraft Login 🎬</h2>
+
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username (only letters)">
+    <input type="password" id="password" placeholder="Strong Password">
+    <button type="submit">Login</button>
+    <p id="msg"></p>
+  </form>
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let username = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+  let msg = document.getElementById("msg");
+
+  // Username validation (only alphabets)
+  let userPattern = /^[A-Za-z]+$/;
+
+  // Strong password:
+  // At least 8 chars, 1 uppercase, 1 lowercase, 1 number, 1 special char
+  let passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+  if(!userPattern.test(username)){
+    msg.style.color = "red";
+    msg.innerText = "Username must contain only alphabets ❌";
+    return;
+  }
+
+  if(!passPattern.test(password)){
+    msg.style.color = "red";
+    msg.innerText = "Password must be strong (8+ chars, A-Z, a-z, number, special char) ❌";
+    return;
+  }
+
+  // SUCCESS
+  msg.style.color = "lightgreen";
+  msg.innerText = "Login successful 🎉 Redirecting...";
+
+  setTimeout(()=>{
+    window.location.href = "Filmwiki.html";
+  },1000);
+
+});
+</script>
+
+</body>
+</html>
